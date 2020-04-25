@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 interface ContainerProps {
+  url: string;
   size?: 'small' | 'large';
 }
 
@@ -22,9 +23,17 @@ export const Container = styled.div<ContainerProps>`
         text-decoration: none;
         font-size: 16px;
         transition: opacity 0.2s;
+        padding-bottom: 10px;
+
+        &:first-child {
+          border-bottom: ${({ url }) =>
+            url === '/' ? ' 2px solid #ff872c ' : 'none'};
+        }
 
         & + a {
           margin-left: 32px;
+          border-bottom: ${({ url }) =>
+            url === '/import' ? ' 2px solid #ff872c ' : 'none'};
         }
 
         &:hover {

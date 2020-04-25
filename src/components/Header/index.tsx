@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 import { Container } from './styles';
 
@@ -10,19 +10,23 @@ interface HeaderProps {
   size?: 'small' | 'large';
 }
 
-const Header: React.FC<HeaderProps> = ({ size = 'large' }: HeaderProps) => (
-  <Container size={size}>
-    <header>
-      <img src={Logo} alt="GoFinances" />
-      <nav>
-        <>
-          <Link to="/">Listagem</Link>
+const Header: React.FC<HeaderProps> = ({ size = 'large' }: HeaderProps) => {
+  const { url } = useRouteMatch();
+  console.log(url);
+  return (
+    <Container url={url} size={size}>
+      <header>
+        <img src={Logo} alt="GoFinances" />
+        <nav>
+          <>
+            <Link to="/">Listagem</Link>
 
-          <Link to="/import">Importar</Link>
-        </>
-      </nav>
-    </header>
-  </Container>
-);
+            <Link to="/import">Importar</Link>
+          </>
+        </nav>
+      </header>
+    </Container>
+  );
+};
 
 export default Header;
