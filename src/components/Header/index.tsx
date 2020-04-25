@@ -12,7 +12,6 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ size = 'large' }: HeaderProps) => {
   const { url } = useRouteMatch();
-  console.log(url);
   return (
     <Container url={url} size={size}>
       <header>

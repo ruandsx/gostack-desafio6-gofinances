@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { format, parseISO } from 'date-fns';
 import income from '../../assets/income.svg';
 import outcome from '../../assets/outcome.svg';
 import total from '../../assets/total.svg';
@@ -91,10 +91,17 @@ const Dashboard: React.FC = () => {
                 <tr key={transaction.id}>
                   <td className="title">{transaction.title}</td>
                   <td className={transaction.type}>
-                    {formatValue(Number(transaction.value), transaction.type)}
+                    {transaction.type === 'outcome'
+                      ? `- ${formatValue(transaction.value)}`
+                      : `${formatValue(transaction.value)}`}
                   </td>
                   <td>{transaction.category.title}</td>
-                  <td>{transaction.created_at}</td>
+                  <td>
+                    {format(
+                      parseISO(transaction.created_at.toString()),
+                      'dd/MM/yyyy',
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
